@@ -1,14 +1,32 @@
 <template>
   <div class="product-edit">
-    <ProductEditComponent />
+    <product-form :product="product" />
   </div>
 </template>
 
 <script>
-import ProductEditComponent from './../../components/products/ProductEditComponent.vue';
+import ProductForm from './../../components/products/ProductForm.vue';
 export default {
-  components: {
-    ProductEditComponent
+  components: { ProductForm },
+  inject: ['$axios'],
+  data() {
+    return {
+      product: {}
+    };
+  },
+  created() {
+    this.loadProduct();
+  },
+  methods: {
+    async loadProduct() {
+      try {
+        const data = await this.$axios.get(`/api/products/${this.$route.params.id}/edit.json`);
+        this.product = data.data.product;
+      } catch (err) {
+        console.log('error', err);
+      }
+      this.isLoading = false
+    },
   }
 }
 </script>

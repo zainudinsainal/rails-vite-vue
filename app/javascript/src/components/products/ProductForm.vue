@@ -2,14 +2,14 @@
   <div class="container">
     <div class="card">
       <div class="card-header">
-        <h6>Add Product</h6>
+        <h6>{{ product.id ? 'Edit' : 'Add' }} Product</h6>
       </div>
       <div class="card-body">
         <form v-on:submit.prevent="saveProduct">
           <div class="form-group row">
             <div class="col-6" :class="{invalid: product.errors && product.errors.name}">
               <label>Product Name:</label>
-              <input type="text" class="form-control" v-model="product.name" />
+              <input type="text" class="form-control" min="0" step=".01" v-model="product.name" />
               <span class='invalid' v-if="product.errors">{{product.errors.name}}</span>
             </div>
             <div class="col-6" :class="{invalid: product.errors && product.errors.price}">
@@ -32,10 +32,10 @@
             <input
               type="submit"
               class="btn btn-primary"
-              value="Add Product"
-              v-if="!isCreating"
+              value="Submit"
+              v-if="!isSubmitting"
             />
-            <button class="btn btn-primary" type="button" disabled v-if="isCreating">
+            <button class="btn btn-primary" type="button" disabled v-if="isSubmitting">
               <span
                 class="spinner-border spinner-border-sm"
                 role="status"
@@ -53,36 +53,36 @@
 <script>
 export default {
   inject: ['$axios'],
+  props: {
+    product: {
+      type: Object,
+    },
+  },
   data() {
     return {
-      product: {},
-      isCreating: false,
+      isSubmitting: false,
     };
   },
-  created() {
-    this.loadProduct();
-  },
   methods: {
-    async loadProduct() {
-      try {
-        const data = await this.$axios.get('/api/products/new.json');
-        this.product = data.data.product;
-      } catch (err) {
-        console.log('error', err);
-      }
-    },
     async saveProduct() {
-      this.isCreating = true
+      this.isSubmitting = true
       try {
-        await this.$axios.post('/api/products.json', { product: this.product })
+        const url = this.product.id ? `/api/products/${this.$route.params.id}.json` : '/api/products.json'
+        const method = this.product.id ? 'patch' : 'post'
+        const text = this.product.id ? 'updated' : 'added'
+        await this.$axios({
+          method: method,
+          url: url,
+          data: { product: this.product }
+        })
         this.$swal.fire({
-          text: "Success, Product has been added.",
+          text: `Success, Product has been ${ text }.`,
           icon: "success",
           position: "top-end",
           timer: 1000,
         });
         this.$router.push({ name: "Products" });
-        this.isCreating = false
+        this.isSubmitting = false
       } catch (err) {
         const errors = err.response.data.product.errors;
         for (const key in errors) {
@@ -90,7 +90,7 @@ export default {
         }
         this.product.errors = errors;
       }
-      this.isCreating = false
+      this.isSubmitting = false
     }
   },
 };

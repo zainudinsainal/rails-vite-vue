@@ -1,14 +1,32 @@
 <template>
   <div class="product-new">
-    <ProductNewComponent />
+    <product-form :product="product" />
   </div>
 </template>
 
 <script>
-import ProductNewComponent from './../../components/products/ProductNewComponent.vue';
+import ProductForm from './../../components/products/ProductForm.vue';
+
 export default {
-  components: {
-    ProductNewComponent
+  components: { ProductForm },
+  inject: ['$axios'],
+  data() {
+    return {
+      product: {}
+    };
+  },
+  created() {
+    this.loadProduct();
+  },
+  methods: {
+    async loadProduct() {
+      try {
+        const data = await this.$axios.get('/api/products/new.json');
+        this.product = data.data.product;
+      } catch (err) {
+        console.log('error', err);
+      }
+    },
   }
 }
 </script>
