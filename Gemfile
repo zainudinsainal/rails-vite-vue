@@ -52,3 +52,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'vite_rails'
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'oj'
+gem 'pagy'
+gem 'faker'
+gem 'ransack'
