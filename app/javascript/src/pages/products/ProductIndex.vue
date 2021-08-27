@@ -61,6 +61,11 @@ export default {
       search: null,
     };
   },
+  computed: {
+    user() {
+      return this.$store.getters['user/role']
+    }
+  },
   created() {
     this.loadProducts();
   },
