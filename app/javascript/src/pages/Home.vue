@@ -18,7 +18,7 @@
       </div>
     </div>
     <div>
-      <product-list
+      <product-index
         @totalProduct="totalProduct"
       />
     </div>
@@ -27,11 +27,11 @@
 
 <script>
 // @ is an alias to /src
-import ProductList from '../components/products/ProductList.vue';
+import ProductIndex from '../pages/products/ProductIndex.vue';
 
 export default {
   name: 'Home',
-  components: { ProductList },
+  components: { ProductIndex },
   data() {
     return {
       totalCount: null

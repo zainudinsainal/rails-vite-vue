@@ -12,7 +12,6 @@
     "debounce": "^1.2.1",
     "font-awesome": "^4.7.0",
     "nprogress": "^0.2.0",
-    "sass": "^1.38.1",
     "vue": "^3.1.5",
     "vue-router": "4.0.10",
     "vue-sweetalert2": "^5.0.2",
@@ -20,6 +19,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "sass": "^1.38.1",
     "vite": "^2.5.1",
     "vite-plugin-ruby": "^3.0.1",
     "@vitejs/plugin-vue": "^1.6.0"

@@ -6,9 +6,11 @@
 
 <script>
 import ProductForm from './../../components/products/ProductForm.vue';
+import Repository from '../../repositories/index.js';
+const ProductRepository = Repository.call('products');
+
 export default {
   components: { ProductForm },
-  inject: ['$axios'],
   data() {
     return {
       product: {}
@@ -20,7 +22,7 @@ export default {
   methods: {
     async loadProduct() {
       try {
-        const data = await this.$axios.get(`/api/products/${this.$route.params.id}/edit.json`);
+        const data = await ProductRepository.edit(this.$route.params.id);
         this.product = data.data.product;
       } catch (err) {
         console.log('error', err);

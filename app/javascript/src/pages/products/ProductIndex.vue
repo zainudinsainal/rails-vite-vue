@@ -48,10 +48,11 @@
 import ProductList from './../../components/products/ProductList.vue';
 import VPagination from "@hennge/vue3-pagination";
 import { debounce } from "debounce";
+import Repository from '../../repositories/index.js';
+const ProductRepository = Repository.call('products');
 
 export default {
   components: { ProductList, VPagination },
-  inject: ['$axios'],
   data() {
     return {
       products: [],
@@ -67,7 +68,7 @@ export default {
     async loadProducts() {
       this.isLoading = true;
       try {
-        const data = await this.$axios.get('/api/products.json', { params: this.$route.query });
+        const data = await ProductRepository.index(this.$route.query);
         this.products = data.data.products;
         this.pagination = data.data.meta.pagination;
       } catch (err) {
@@ -78,7 +79,7 @@ export default {
     },
     async deleteProduct(id) {
       try {
-        await this.$axios.delete(`/api/products/${id}.json`)
+        await ProductRepository.destroy(id);
       } catch (err) {
         console.log('error', err);
       }

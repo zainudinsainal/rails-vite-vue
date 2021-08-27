@@ -1,8 +1,9 @@
 export default [
+  { path: '/', redirect: '/home' },
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
-    component: '../../pages/Home.vue'
+    component: () => import('../../pages/Home.vue')
   },
   {
     path: '/help',

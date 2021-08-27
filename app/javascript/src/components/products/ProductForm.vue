@@ -51,8 +51,10 @@
 </template>
 
 <script>
+import Repository from '../../repositories/index.js';
+const ProductRepository = Repository.call('products');
+
 export default {
-  inject: ['$axios'],
   props: {
     product: {
       type: Object,
@@ -67,16 +69,9 @@ export default {
     async saveProduct() {
       this.isSubmitting = true
       try {
-        const url = this.product.id ? `/api/products/${this.$route.params.id}.json` : '/api/products.json'
-        const method = this.product.id ? 'patch' : 'post'
-        const text = this.product.id ? 'updated' : 'added'
-        await this.$axios({
-          method: method,
-          url: url,
-          data: { product: this.product }
-        })
+        this.product.id ? await ProductRepository.update(this.product.id, this.product) : await ProductRepository.create(this.product)
         this.$swal.fire({
-          text: `Success, Product has been ${ text }.`,
+          text: `Success, Product has been ${ this.product.id ? 'updated' : 'added' }.`,
           icon: "success",
           position: "top-end",
           timer: 1000,
