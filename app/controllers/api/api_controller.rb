@@ -1,4 +1,4 @@
-class Api::ApiController < ActionController::API
+class Api::ApiController < ApplicationController
   include Pagy::Backend
 
   def meta_attributes(collection, extra_meta = {})

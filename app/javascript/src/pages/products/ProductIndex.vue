@@ -48,8 +48,8 @@
 import ProductList from './../../components/products/ProductList.vue';
 import VPagination from "@hennge/vue3-pagination";
 import { debounce } from "debounce";
-import Repository from '../../repositories/index.js';
-const ProductRepository = Repository.call('products');
+import Service from '../../services/index.js';
+const ProductService = Service.call('products');
 
 export default {
   components: { ProductList, VPagination },
@@ -68,7 +68,7 @@ export default {
     async loadProducts() {
       this.isLoading = true;
       try {
-        const data = await ProductRepository.index(this.$route.query);
+        const data = await ProductService.index(this.$route.query);
         this.products = data.data.products;
         this.pagination = data.data.meta.pagination;
       } catch (err) {
@@ -79,7 +79,7 @@ export default {
     },
     async deleteProduct(id) {
       try {
-        await ProductRepository.destroy(id);
+        await ProductService.destroy(id);
       } catch (err) {
         console.log('error', err);
       }
@@ -97,6 +97,7 @@ export default {
     },
     searchProduct() {
       this.$route.query.q = this.search;
+      this.$route.query.page = 1;
     }
   },
   watch: {

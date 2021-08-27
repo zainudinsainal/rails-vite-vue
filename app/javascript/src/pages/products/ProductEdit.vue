@@ -6,8 +6,8 @@
 
 <script>
 import ProductForm from './../../components/products/ProductForm.vue';
-import Repository from '../../repositories/index.js';
-const ProductRepository = Repository.call('products');
+import Service from '../../services/index.js';
+const ProductService = Service.call('products');
 
 export default {
   components: { ProductForm },
@@ -22,7 +22,7 @@ export default {
   methods: {
     async loadProduct() {
       try {
-        const data = await ProductRepository.edit(this.$route.params.id);
+        const data = await ProductService.edit(this.$route.params.id);
         this.product = data.data.product;
       } catch (err) {
         console.log('error', err);

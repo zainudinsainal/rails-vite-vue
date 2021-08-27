@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import Repository from '../../repositories/index.js';
-const ProductRepository = Repository.call('products');
+import Service from '../../services/index.js';
+const ProductService = Service.call('products');
 
 export default {
   props: {
@@ -69,7 +69,7 @@ export default {
     async saveProduct() {
       this.isSubmitting = true
       try {
-        this.product.id ? await ProductRepository.update(this.product.id, this.product) : await ProductRepository.create(this.product)
+        this.product.id ? await ProductService.update(this.product.id, this.product) : await ProductService.create(this.product)
         this.$swal.fire({
           text: `Success, Product has been ${ this.product.id ? 'updated' : 'added' }.`,
           icon: "success",
@@ -79,6 +79,7 @@ export default {
         this.$router.push({ name: "Products" });
         this.isSubmitting = false
       } catch (err) {
+        // Add check for status 500 and gives a messages
         const errors = err.response.data.product.errors;
         for (const key in errors) {
           errors[key] = errors[key].join(', ');
