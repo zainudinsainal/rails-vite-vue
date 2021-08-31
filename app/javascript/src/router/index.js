@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import error from './modules/error.js';
 import home from './modules/home.js';
 import product from './modules/product.js';
 import NProgress from 'nprogress';
 
 const routes = [
+  ...error,
   ...home,
   ...product
 ]

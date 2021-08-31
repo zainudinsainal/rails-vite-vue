@@ -47,7 +47,7 @@ class Api::ProductsController < Api::ApiController
     if @product.destroy
       render json: @product, status: :ok
     else
-      render json: @product, status: :ok
+      render json: @product, status: :unprocessable_entity
     end
   end
 

@@ -79,12 +79,15 @@ export default {
         this.$router.push({ name: "Products" });
         this.isSubmitting = false
       } catch (err) {
-        // Add check for status 500 and gives a messages
-        const errors = err.response.data.product.errors;
-        for (const key in errors) {
-          errors[key] = errors[key].join(', ');
+        if (err.response.status === 422) {
+          const errors = err.response.data.product.errors;
+          for (const key in errors) {
+            errors[key] = errors[key].join(', ');
+          }
+          this.product.errors = errors;
+        } else {
+          window.alert(err.response.statusText)
         }
-        this.product.errors = errors;
       }
       this.isSubmitting = false
     }
