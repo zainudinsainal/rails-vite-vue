@@ -1,7 +1,6 @@
 rails:
   configuration:
     ruby_version: 2.7.4
-    asset_pipeline_precompile: true
     bundler:
       options:
         without: ["development", "test", "custom"]
