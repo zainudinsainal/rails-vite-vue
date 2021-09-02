@@ -1,0 +1,5 @@
+production: #Environment
+    after_bundle: # Hook point
+      - command: bundle exec rails vite:clobber # Remove the Vite build output directory
+        target: any # Hook fields
+        execute: true
