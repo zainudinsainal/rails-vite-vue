@@ -76,11 +76,11 @@ export default {
         const data = await ProductService.index(this.$route.query);
         this.products = data.data.products;
         this.pagination = data.data.meta.pagination;
+        this.$emit('totalProduct', this.pagination.count)
       } catch (err) {
         console.log('error', err);
       }
       this.isLoading = false;
-      this.$emit('totalProduct', this.pagination.count)
     },
     async deleteProduct(id) {
       try {
