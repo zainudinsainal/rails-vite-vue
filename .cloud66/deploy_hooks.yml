@@ -1,5 +1,12 @@
-production: #Environment
-  after_checkout: # Hook point
-    - command: bundle exec rails vite:clobber # Remove the Vite build output directory
-      target: rails # Hook fields
-      execute: true
+first_thing:
+- target: rails
+  execute: true
+  apply_during: all
+  sudo: true
+  inline: |
+    #!/usr/bin/env bash
+    echo "Remove Vite Cache"
+
+    rm -f /tmp/cache/vite
+
+    echo "Vite Cache remove"
