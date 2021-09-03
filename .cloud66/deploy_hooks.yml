@@ -1,9 +1,9 @@
 first_thing:
 - target: rails
   execute: true
-  apply_during: all
+  apply_during: deploy_only
   sudo: true
   inline: |
     #!/usr/bin/env bash
     echo "Remove Vite Cache"
-    rm -rf /tmp/cache/vite
+    bundle exec rails vite:clobber
