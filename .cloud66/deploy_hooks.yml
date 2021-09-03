@@ -1,4 +1,4 @@
-after_symlink:
+last_thing:
 - target: rails
   execute: true
   apply_during: deploy_only
@@ -6,4 +6,4 @@ after_symlink:
   inline: |
     #!/usr/bin/env bash
     echo "Remove Vite Cache"
-    rails vite:clobber
+    rm -rf /tmp/cache/vite
