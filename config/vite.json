@@ -13,7 +13,6 @@
     "publicOutputDir": "vite-test"
   },
   "production": {
-    "buildCacheDir": "public/packs",
-    "publicOutputDir": "/packs"
+    "buildCacheDir": "public/packs"
   }
 }
