@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/zainudinsainal/vite_ruby
-  revision: 46e2b28b767e2f9c5351c26e7489b4ecc8db3c20
+  revision: 97828c82b865f35cf0c1b5f4cf587881c16233d0
   branch: main
   specs:
     vite_rails (3.0.0)
