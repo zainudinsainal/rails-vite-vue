@@ -1,7 +1,7 @@
 first_thing:
 - target: rails
   execute: true
-  apply_during: deploy_only
+  apply_during: all
   sudo: true
   inline: |
     #!/usr/bin/env bash
