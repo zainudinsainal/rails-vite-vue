@@ -1,4 +1,4 @@
-after_bundle:
+after_symlink:
 - target: rails
   execute: true
   apply_during: deploy_only
