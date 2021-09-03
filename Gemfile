@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-gem 'vite_rails', git: 'https://github.com/zainudinsainal/vite_ruby', branch: 'main'
+gem 'vite_rails'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'oj'
 gem 'pagy'
