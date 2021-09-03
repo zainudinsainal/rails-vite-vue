@@ -1,4 +1,4 @@
-last_thing:
+after_bundle:
 - target: rails
   execute: true
   apply_during: deploy_only
@@ -6,4 +6,4 @@ last_thing:
   inline: |
     #!/usr/bin/env bash
     echo "Remove Vite Cache"
-    rm -rf /tmp/cache/vite
+    bin/vite clobber
