@@ -1,9 +1,0 @@
-after_bundle:
-- target: rails
-  execute: true
-  apply_during: deploy_only
-  sudo: true
-  inline: |
-    #!/usr/bin/env bash
-    echo "Remove Vite Cache"
-    bin/vite clobber

@@ -11,5 +11,9 @@
   "test": {
     "autoBuild": true,
     "publicOutputDir": "vite-test"
+  },
+  "production": {
+    "buildCacheDir": "public/packs",
+    "publicOutputDir": "/packs"
   }
 }
