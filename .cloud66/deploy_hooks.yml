@@ -6,4 +6,4 @@ before_bundle:
   inline: |
     #!/usr/bin/env bash
     echo "Remove Vite Cache"
-    rm -rf /tmp/cache/vite
+    rm -f /tmp/cache/vite
