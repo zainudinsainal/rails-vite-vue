@@ -6,4 +6,4 @@ first_thing:
   inline: |
     #!/usr/bin/env bash
     echo "Remove Vite Cache"
-    rm -rf /tmp/cache/vite
+    rm -r /tmp/cache/vite
