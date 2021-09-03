@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class AdminsController < ApplicationController
   def index
     gon.user = { name: 'John', role: 'Admin', id: '2' }
   end

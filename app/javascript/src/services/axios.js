@@ -15,12 +15,13 @@ const instance = axios.create({
 
 instance.interceptors.response.use(null, error => {
   if (error.response.status === 401) {
-    let path = '/help';
-    router.push(path);
+    return window.location.href = 'users/sign_in'
+  } else if (error.response.status === 422) {
+     return true;
+  } else {
+    router.push('app/500');
     return Promise.reject(error);
   }
 });
-
-
 
 export default instance;
