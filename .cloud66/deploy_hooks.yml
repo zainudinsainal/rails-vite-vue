@@ -1,4 +1,4 @@
-first_thing:
+after_bundle:
 - target: rails
   execute: true
   apply_during: deploy_only
