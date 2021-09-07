@@ -11,7 +11,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory('/adm'),
+  history: createWebHistory('/app'),
   routes
 })
 

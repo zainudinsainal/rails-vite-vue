@@ -6,13 +6,13 @@ Rails.application.routes.draw do
     resources :products
   end
 
-  # Admin
-  get '/adm', to: "admins#index"
-  match "adm/*path", to: "admins#index", format: false, via: :get
+  # Users
+  get '/app', to: "users#index"
+  match "app/*path", to: "users#index", format: false, via: :get
 
-  # Employee
-  # get '/emp', to: "employees#index"
-  # match "emp/*path", to: "employees#index", format: false, via: :get
+  # CMS
+  # get '/cms', to: "cms#index"
+  # match "cms/*path", to: "cms#index", format: false, via: :get
 
   # Public
   match "*path", to: "public#index", format: false, via: :get
