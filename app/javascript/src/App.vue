@@ -1,29 +1,66 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="app">
+    <div class="app-container">
+      <img alt="Vue logo" src="./assets/primevue-logo.png">
+      <HelloWorld msg="Welcome to Your PrimeVue App"/>
+      <form @submit.prevent="greet">
+        <InputText type="text" v-model="text"/>
+        <Button type="submit" label="Submit"/>
+        <h3>{{message}}</h3>
+      </form>
+    </div>
+
+    <Toast/>
   </div>
-  <router-view/>
 </template>
 
-<style>
+<script>
+import HelloWorld from './components/HelloWorld.vue';
+
+export default {
+    data() {
+        return {
+            message: null,
+            text: null
+        }
+    },
+    methods: {
+        greet() {
+            this.$toast.add({severity: 'info', summary: 'Hello '  + this.text});
+            this.message = 'Hello ' + this.text;
+        }
+    },
+    components: {
+      HelloWorld
+    }
+}
+</script>
+
+<style scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+  margin-top: 60px;
+}
+.app-container {
+  text-align: center;
+}
+body #app .p-button {
+  margin-left: .2em;
+}
+form {
+  margin-top: 2em;
 }
 
 #nav {
   padding: 30px;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #42b983;
 }
