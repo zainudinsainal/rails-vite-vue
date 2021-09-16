@@ -7,14 +7,21 @@ Rails.application.routes.draw do
   end
 
   # Users
-  get '/app', to: "users#index"
-  match "app/*path", to: "users#index", format: false, via: :get
+  constraints subdomain: 'app' do
+    get '/', to: "users#index"
+    match "*path", to: "users#index", format: false, via: :get
+  end
 
   # CMS
-  # get '/cms', to: "cms#index"
-  # match "cms/*path", to: "cms#index", format: false, via: :get
+  # constraints subdomain: 'cms' do
+    # get '/', to: "cms#index"
+    # match "cms/*path", to: "cms#index", format: false, via: :get
+  # end
 
   # Public
-  match "*path", to: "public#index", format: false, via: :get
+  constraints subdomain: '' do
+    get '/', to: "public#index"
+    match "*path", to: "public#index", format: false, via: :get
+  end
   root to: 'public#index'
 end
