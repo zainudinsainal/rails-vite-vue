@@ -26,6 +26,14 @@
             </div>
           </div>
           <div class="form-group">
+            <button @click="openUppyModal = true" class="btn btn-success" type="button">Open Image Upload</button>
+            <dashboard-modal
+              :uppy="uppy"
+              :plugins="plugins"
+              :open="openUppyModal"
+              :props="dashboardProps" />
+          </div>
+          <div class="form-group">
             <router-link to="/products" class="btn btn-secondary mr-2"
               >Cancel</router-link
             >
@@ -51,10 +59,19 @@
 </template>
 
 <script>
+import { DashboardModal } from '@uppy/vue'
+import '@uppy/core/dist/style.css'
+import '@uppy/dashboard/dist/style.css'
+import Uppy from '@uppy/core'
+import Webcam from '@uppy/webcam'
+
 import Service from '../../services/index.js';
 const ProductService = Service.call('products');
 
 export default {
+  components: {
+    DashboardModal
+  },
   props: {
     product: {
       type: Object,
@@ -63,9 +80,22 @@ export default {
   data() {
     return {
       isSubmitting: false,
+      plugins: ['Webcam'],
+      openUppyModal: false,
+      dashboardProps: {
+        theme: 'light',
+        onRequestCloseModal: this.handleClose
+      }
     };
   },
+  computed: {
+    uppy: () => new Uppy().use(Webcam)
+  },
+  beforeDestroy () {
+    this.uppy.close()
+  },
   methods: {
+    handleClose() { this.openUppyModal = false },
     async saveProduct() {
       this.isSubmitting = true
       try {
