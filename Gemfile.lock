@@ -98,7 +98,10 @@ GEM
     childprocess (3.0.0)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
+    content_disposition (1.0.0)
     crass (1.0.6)
+    down (5.2.4)
+      addressable (~> 2.8)
     dry-cli (0.7.0)
     erubi (1.10.0)
     faker (2.19.0)
@@ -201,6 +204,9 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    shrine (3.4.0)
+      content_disposition (~> 1.0)
+      down (~> 5.1)
     sidekiq (6.2.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -255,6 +261,7 @@ DEPENDENCIES
   ransack
   sass-rails (>= 6)
   selenium-webdriver
+  shrine (~> 3.0)
   sidekiq
   spring
   tzinfo-data
