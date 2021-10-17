@@ -49,7 +49,7 @@ import ProductList from './../../components/products/ProductList.vue';
 import VPagination from "@hennge/vue3-pagination";
 import { debounce } from "debounce";
 import Service from '../../services/index.js';
-const ProductService = Service.call('products');
+const ProductService = Service.call('product');
 
 export default {
   components: { ProductList, VPagination },

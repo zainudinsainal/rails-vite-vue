@@ -7,7 +7,7 @@
 <script>
 import ProductForm from './../../components/products/ProductForm.vue';
 import Service from '../../services/index.js';
-const ProductService = Service.call('products');
+const ProductService = Service.call('product');
 
 export default {
   components: { ProductForm },

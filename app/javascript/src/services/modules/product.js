@@ -3,7 +3,7 @@ const resource = 'products';
 
 export default {
   index(payload) {
-    return $axios.get('/api/products.json', { params: payload });
+    return $axios.get(`/api/${resource}.json`, { params: payload });
   },
   show(id) {
     return $axios.get(`/api/${resource}/${id}.json`);
