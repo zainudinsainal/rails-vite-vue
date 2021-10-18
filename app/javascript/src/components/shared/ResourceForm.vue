@@ -15,15 +15,15 @@
               type="submit"
               class="btn btn-primary"
               value="Submit"
-              v-if="!isSubmitting"
+              v-if="!submitBtnDisabled"
             />
-            <button class="btn btn-primary" type="button" disabled v-if="isSubmitting">
+            <button class="btn btn-primary" type="button" disabled v-if="submitBtnDisabled">
               <span
                 class="spinner-border spinner-border-sm"
                 role="status"
                 aria-hidden="true"
               ></span>
-              Saving...
+              {{submittingText}}
             </button>
           </div>
         </form>
@@ -36,13 +36,11 @@
 import Service from '../../services/index.js';
 
 export default {
+  emit: ['afterSubmit'],
   props: {
-    resourceType: {
+    modelValue: {},
+    modelName: {
       type: String,
-      required: true
-    },
-    resource: {
-      type: Object,
       required: true
     },
     successMsg: {
@@ -56,6 +54,21 @@ export default {
     redirectBack: {
       type: String,
       required: true
+    },
+    disableSubmit: {
+      type: Boolean,
+      default: false
+    },
+    beforeSubmitWarn: {
+      type: String,
+      default: null
+    },
+    beforeSubmit: {
+      type: Function
+    },
+    submittingText: {
+      type: String,
+      default: 'Submitting...'
     }
   },
   data() {
@@ -63,17 +76,38 @@ export default {
       isSubmitting: false,
     };
   },
+  computed: {
+    submitBtnDisabled() {
+      return this.disableSubmit || this.isSubmitting;
+    }
+  },
   methods: {
     submit() {
       this.isSubmitting = true
       this.$nextTick(() => this.submitResource())
     },
     async submitResource() {
-      const ResourceService = Service.call(this.resourceType)
+      const ResourceService = Service.call(this.modelName)
 
-      this.isSubmitting = true
+      if (this.disableSubmit) {
+        setTimeout(() => this.submitResource(), 3000);
+        return
+      }
+
+      if (this.beforeSubmit) this.beforeSubmit();
+
+      if (this.beforeSubmitWarn) {
+        this.$emit('afterSubmit', null) //set emit before swalWarn to prevent message from appearing twice because beforeSubmitWarn value is asynchronously added to swalWarn
+        swalWarn(this.beforeSubmitWarn).then(result => {
+          if (result.value) {
+            this.submitForm();
+          }
+        });
+        return;
+      }
+
       try {
-        this.resource.id ? await ResourceService.update(this.resource.id, this.resource) : await ResourceService.create(this.resource)
+        this.modelValue.id ? await ResourceService.update(this.modelValue.id, this.modelValue) : await ResourceService.create(this.modelValue)
         this.$swal.fire({
           text: this.message,
           icon: "success",
@@ -84,11 +118,11 @@ export default {
         this.isSubmitting = false
       } catch (err) {
         if (err.response.status === 422) {
-          const errors = err.response.data[this.resourceType].errors;
+          const errors = err.response.data[this.modelName].errors;
           for (const key in errors) {
             errors[key] = errors[key].join(', ');
           }
-          this.resource.errors = errors;
+          this.modelValue.errors = errors;
         } else {
           window.alert(err.response.statusText)
         }
