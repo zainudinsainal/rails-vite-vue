@@ -43,6 +43,10 @@ export default {
       type: String,
       required: true
     },
+    action: {
+      type: String,
+      required: true
+    },
     successMsg: {
       type: String,
       required: true
@@ -107,7 +111,7 @@ export default {
       }
 
       try {
-        this.modelValue.id ? await ResourceService.update(this.modelValue.id, this.modelValue) : await ResourceService.create(this.modelValue)
+        await ResourceService[this.action](this.modelValue)
         this.$swal.fire({
           text: this.message,
           icon: "success",

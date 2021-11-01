@@ -1,5 +1,5 @@
 <template>
-  <resource-form modelName="product" v-model="product" :successMsg="successMsg" redirectTo="Products" redirectBack="/products">
+  <resource-form modelName="product" v-model="product" :successMsg="successMsg" redirectTo="Products" redirectBack="/products" :action="action">
     <template #header><!-- using the shorthand for `v-slot` -->
       <h6>{{ product.id ? 'Edit' : 'Add' }} Product</h6>
     </template>
@@ -38,6 +38,9 @@ export default {
     },
   },
   computed: {
+    action() {
+      return this.product.id ? 'update' : 'create'
+    },
     successMsg() {
       return `Success, Product has been ${ this.product.id ? 'updated' : 'added' }.`
     }
