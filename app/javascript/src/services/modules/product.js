@@ -17,8 +17,8 @@ export default {
   edit(id) {
     return $axios.get(`/api/${resource}/${id}/edit.json`)
   },
-  update(id, payload) {
-    return $axios.patch(`/api/${resource}/${id}.json`, payload);
+  update(payload) {
+    return $axios.patch(`/api/${resource}/${payload.id}.json`, payload);
   },
   destroy(id) {
     return $axios.delete(`/api/${resource}/${id}.json`)
