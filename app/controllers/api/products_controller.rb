@@ -6,7 +6,7 @@ class Api::ProductsController < Api::ApiController
     @pagy, @products = pagy(@q.result(distinct: true), items: 10)
 
     # https://github.com/rails-api/active_model_serializers/blob/v0.10.6/docs/howto/add_pagination_links.md
-    render json: @products, meta: meta_attributes(@pagy)
+    render json: @products.order(id: :desc), meta: meta_attributes(@pagy)
   end
 
   def show
