@@ -2,7 +2,7 @@
   <div class="row border-1 p-2">
     <div class="col-3">{{ product.name }}</div>
     <div class="col-2"><strong class="text-danger">$ {{ parseFloat(product.price).toFixed(2) }}</strong></div>
-    <div class="col-2"><span class="badge badge-info">Username</span></div>
+    <div class="col-2"><span class="badge badge-info">{{product.created_at}}</span></div>
     <div class="col-5">
       <router-link
         :to="{ name: 'ProductShow', params: { id: product.id } }"
