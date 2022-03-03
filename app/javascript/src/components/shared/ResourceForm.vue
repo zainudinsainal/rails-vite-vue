@@ -116,7 +116,7 @@ export default {
           text: this.message,
           icon: "success",
           position: "top-end",
-          timer: 1000,
+          timer: 2000,
         });
         this.$router.push({ name: this.redirectTo });
         this.isSubmitting = false

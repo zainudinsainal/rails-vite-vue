@@ -1,17 +1,19 @@
 <template>
   <div>
-    <div v-bind="getRootProps()">
+    <div class="border border-dark rounded" v-bind="getRootProps()">
       <input v-bind="getInputProps()" />
-      <p v-if="isDragActive">Drop the files here ...</p>
-      <p v-else>Drag 'n' drop some files here, or click to select files</p>
+      <p v-if="isDragActive" class="text-center size">Drop the files here ...</p>
+      <p v-else class="text-center size">Drag 'n' drop some files here, or click to select files</p>
     </div>
-    <button @click="open">open</button>
+    <br>
+    <button @click="open" class="btn btn-primary">open</button>
   </div>
 </template>
 
 <script>
 import { useRoute, useRouter } from 'vue-router'
 import { useDropzone } from "vue3-dropzone";
+import { inject } from 'vue'
 import axios from "axios";
 
 export default {
@@ -19,6 +21,7 @@ export default {
   setup() {
     const route = useRoute()
     const router = useRouter()
+    const swal = inject('$swal')
     const url = `/api/products/${route.params.id}/upload.json`; // Your url on the server side
     const token = document.querySelector('[name="csrf-token"]') || { content: 'no-csrf-token' }
     const saveFiles = (files) => {
@@ -39,6 +42,12 @@ export default {
         })
         .then((response) => {
           console.info(response.data);
+          swal({
+            text: "Upload Success",
+            icon: "success",
+            position: "top-end",
+            timer: 2000,
+          });
           router.push({ name: 'ProductShow', params: { id: route.params.id } })
         })
         .catch((err) => {
@@ -61,3 +70,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .size {
+    padding: 10rem;
+  }
+</style>
