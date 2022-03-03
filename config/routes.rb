@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   namespace :api, :defaults => { :format => 'json' } do
-    resources :products
+    resources :products do
+      patch :upload, on: :member
+    end
   end
 
   root to: 'pages#index'

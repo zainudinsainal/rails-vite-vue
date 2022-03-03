@@ -3,6 +3,8 @@ class Product < ApplicationRecord
 
   after_create :notify_new_product
 
+  mount_uploader :image, ImageUploader
+
   private
 
   def notify_new_product

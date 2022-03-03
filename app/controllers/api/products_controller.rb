@@ -1,5 +1,5 @@
 class Api::ProductsController < Api::ApiController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :upload]
 
   def index
     @q = Product.ransack({name_i_cont: params[:q]})
@@ -10,7 +10,6 @@ class Api::ProductsController < Api::ApiController
   end
 
   def show
-    render json: @product
   end
 
   def new
@@ -46,6 +45,11 @@ class Api::ProductsController < Api::ApiController
     else
       render json: @product, status: :unprocessable_entity
     end
+  end
+
+  def upload
+    @product.update(image: params[:images].first)
+    render json: { message: 'good '}, status: :ok
   end
 
   private

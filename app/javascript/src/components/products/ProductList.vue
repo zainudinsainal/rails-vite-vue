@@ -2,13 +2,25 @@
   <div class="row border-1 p-2">
     <div class="col-3">{{ product.name }}</div>
     <div class="col-2"><strong class="text-danger">$ {{ parseFloat(product.price).toFixed(2) }}</strong></div>
-    <div class="col-3"><span class="badge badge-info">Username</span></div>
-    <div class="col-2">
+    <div class="col-2"><span class="badge badge-info">Username</span></div>
+    <div class="col-3">
       <router-link
         :to="{ name: 'ProductEdit', params: { id: product.id } }"
         class="btn btn-primary"
         title="Edit Product">
         <i class="fa fa-pencil"></i>
+      </router-link>
+      <router-link
+        :to="{ name: 'ProductShow', params: { id: product.id } }"
+        class="btn btn-success ml-2"
+        title="View Product">
+        <i class="fa fa-eye"></i>
+      </router-link>
+      <router-link
+        :to="{ name: 'ProductUpload', params: { id: product.id } }"
+        class="btn btn-warning ml-2"
+        title="Upload Product Image">
+        <i class="fa fa-upload"></i>
       </router-link>
       <button
         class="btn btn-danger ml-2"
