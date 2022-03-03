@@ -19,7 +19,6 @@ class Api::ProductsController < Api::ApiController
   end
 
   def create
-    sleep 1
     @product = Product.new(product_params)
 
     if @product.save
@@ -34,7 +33,6 @@ class Api::ProductsController < Api::ApiController
   end
 
   def update
-    sleep 1
     if @product.update(product_params)
       render json: @product, status: :ok
     else
@@ -43,7 +41,6 @@ class Api::ProductsController < Api::ApiController
   end
 
   def destroy
-    sleep 1
     if @product.destroy
       render json: @product, status: :ok
     else
