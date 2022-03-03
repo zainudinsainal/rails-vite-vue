@@ -19,8 +19,8 @@
         <div class="row border-bottom border-top p-2 bg-light">
           <div class="col-3">Product Name</div>
           <div class="col-2">Product Price</div>
-          <div class="col-3">Uploaded By</div>
-          <div class="col-2">Actions</div>
+          <div class="col-2">Uploaded By</div>
+          <div class="col-5">Actions</div>
         </div>
         <div v-for="(product, index) in products" :key="product.id">
           <product-list
