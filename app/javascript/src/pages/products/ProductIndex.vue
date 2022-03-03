@@ -17,10 +17,11 @@
     <div class="">
       <div class="">
         <div class="row border-bottom border-top p-2 bg-light">
-          <div class="col-3">Product Name</div>
+          <div class="col-2">Product Name</div>
           <div class="col-2">Product Price</div>
+          <div class="col-2">Image Upload</div>
           <div class="col-2">Created on</div>
-          <div class="col-5">Actions</div>
+          <div class="col-4">Actions</div>
         </div>
         <div v-for="(product, index) in products" :key="product.id">
           <product-list
