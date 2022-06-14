@@ -1,7 +1,7 @@
 import Product from './modules/product.js';
 
 const modules = {
-  'products': Product
+  'product': Product
 }
 
 export default {
