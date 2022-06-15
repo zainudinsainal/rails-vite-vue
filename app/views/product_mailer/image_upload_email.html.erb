@@ -1,0 +1,20 @@
+<p>
+  A claim's image has been uploaded on <%= @product.updated_at.to_s(:short)%>
+</p>
+
+<hr>
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.name.capitalize %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= "$#{@product.price}" %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @product.description %>
+</p>
