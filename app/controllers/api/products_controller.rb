@@ -50,6 +50,7 @@ class Api::ProductsController < Api::ApiController
 
   def upload
     @product.update(image: params[:images].first)
+    ProductMailer.image_upload_email(@product).deliver_later
     render json: { message: 'Success '}, status: :ok
   end
 
