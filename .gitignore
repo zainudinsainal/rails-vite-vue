@@ -33,6 +33,7 @@
 /public/vite-dev
 /public/vite-test
 /public/packs
+/public/uploads
 /node_modules
 /yarn-error.log
 yarn-debug.log*

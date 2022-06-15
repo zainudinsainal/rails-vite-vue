@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :api, :defaults => { :format => 'json' } do
-    resources :products
+    resources :products do
+      patch :upload, on: :member
+    end
   end
 
   get 'admin/home', to: 'admin/home#index'

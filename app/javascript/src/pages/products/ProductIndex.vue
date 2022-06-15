@@ -5,42 +5,28 @@
         <h4 class="text-left mb-2">All Products</h4>
       </div>
       <div class="col-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Search Products..."
-          @input="searchProduct"
-          v-model="search"
-        />
+        <input type="text" class="form-control" placeholder="Search Products..." @input="searchProduct"
+          v-model="search" />
       </div>
     </div>
     <div class="">
       <div class="">
         <div class="row border-bottom border-top p-2 bg-light">
-          <div class="col-3">Product Name</div>
+          <div class="col-2">Product Name</div>
           <div class="col-2">Product Price</div>
-          <div class="col-3">Uploaded By</div>
-          <div class="col-2">Actions</div>
+          <div class="col-2">Image Upload</div>
+          <div class="col-2">Created on</div>
+          <div class="col-4">Actions</div>
         </div>
         <div v-for="(product, index) in products" :key="product.id">
-          <product-list
-            :index="index"
-            :product="product"
-            @deleteProduct="deleteProduct"/>
+          <product-list :index="index" :product="product" @deleteProduct="deleteProduct" />
         </div>
       </div>
     </div>
 
     <!-- Insert Pagination Part -->
-    <v-pagination
-      v-if="pagination"
-      class="vertical-center mt-2 mb-5"
-      v-model="pagination.page"
-      :pages="pagination.last"
-      :range-size="1"
-      active-color="#DCEDFF"
-      @update:modelValue="updateHandler"
-    />
+    <v-pagination v-if="pagination" class="vertical-center mt-2 mb-5" v-model="pagination.page" :pages="pagination.last"
+      :range-size="1" active-color="#DCEDFF" @update:modelValue="updateHandler" />
   </div>
 </template>
 
@@ -50,7 +36,6 @@ import VPagination from "@hennge/vue3-pagination";
 import { debounce } from "debounce";
 import Service from '../../services/index.js';
 const ProductService = Service.call('product');
-
 export default {
   components: { ProductList, VPagination },
   data() {
@@ -107,7 +92,7 @@ export default {
   },
   watch: {
     search: {
-      handler: debounce(function() {
+      handler: debounce(function () {
         this.loadProducts()
       }, 1000),
       deep: true

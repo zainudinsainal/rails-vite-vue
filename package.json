@@ -19,8 +19,13 @@
     "vue": "^3.1.5",
     "vue-router": "4.0.10",
     "vue-sweetalert2": "^5.0.2",
+    "vue3-dropzone": "^0.0.7",
     "vuex": "4.0.2"
   },
   "version": "0.1.0",
-  "devDependencies": {}
+  "devDependencies": {},
+  "engines": {
+    "node": ">=12.x",
+    "yarn": "1.x"
+  }
 }
